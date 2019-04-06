@@ -12,7 +12,7 @@ class MarsRover {
             } else if (command == 'L') {
                 direction = direction.toTheLeft();
             } else {
-                coordinate = coordinate.moveUp();
+                coordinate = coordinate.moveTowards(direction);
             }
         }
 
@@ -40,8 +40,14 @@ class MarsRover {
             return y;
         }
 
-        Coordinate moveUp() {
-            return new Coordinate(0, y + 1);
+        Coordinate moveTowards(Direction direction) {
+            switch (direction) {
+                case NORTH:
+                    return new Coordinate(0, y + 1);
+                case EAST:
+                    return new Coordinate(x + 1, 0);
+            }
+            return null;
         }
     }
 }

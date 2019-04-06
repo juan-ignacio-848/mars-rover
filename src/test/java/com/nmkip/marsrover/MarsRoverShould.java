@@ -47,4 +47,15 @@ class MarsRoverShould {
     void move_up(String commands, String currentPosition) {
         assertThat(marsRover.execute(commands), is(currentPosition));
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "RM, 1:0:E",
+            "RMM, 2:0:E"
+    })
+    void move_right(String commands, String currentPosition) {
+        assertThat(marsRover.execute(commands), is(currentPosition));
+    }
+
+
 }
