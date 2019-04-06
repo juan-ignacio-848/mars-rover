@@ -93,4 +93,14 @@ class MarsRoverShould {
         assertThat(marsRover.execute(commands), is(currentPosition));
     }
 
+
+    @ParameterizedTest
+    @CsvSource({
+            "MRM, 1:1:E",
+            "MRMRM, 1:0:S",
+            "RMLM, 1:1:N"
+    })
+    void move_in_zigzag(String commands, String currentPosition) {
+        assertThat(marsRover.execute(commands), is(currentPosition));
+    }
 }
