@@ -24,6 +24,9 @@ class MarsRover {
     }
 
     private class Coordinate {
+        private static final int MAX_HEIGHT = 10;
+        private static final int MAX_WIDTH = 10;
+
         private int x;
         private int y;
 
@@ -43,9 +46,11 @@ class MarsRover {
         Coordinate moveTowards(Direction direction) {
             switch (direction) {
                 case NORTH:
-                    return new Coordinate(0, y + 1);
+                    int nextY = (y + 1) % MAX_HEIGHT;
+                    return new Coordinate(0, nextY);
                 case EAST:
-                    return new Coordinate(x + 1, 0);
+                    int nextX = (x + 1) % MAX_WIDTH;
+                    return new Coordinate(nextX, 0);
             }
             return null;
         }
