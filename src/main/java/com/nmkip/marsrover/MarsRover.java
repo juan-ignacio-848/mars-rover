@@ -3,23 +3,17 @@ package com.nmkip.marsrover;
 class MarsRover {
 
     String execute(String commands) {
-        String direction = "N";
+        Direction direction = Direction.NORTH;
 
         for (char command : commands.toCharArray()) {
-            direction = rotateRight(direction);
+            if (command == 'R') {
+                direction = direction.toTheRight();
+            } else {
+                direction = direction.toTheLeft();
+            }
         }
 
-        return "0:0:" + direction;
+        return "0:0:" + direction.value();
     }
 
-    private String rotateRight(String direction) {
-        if (direction.equals("N"))
-            return "E";
-        else if (direction.equals("E"))
-            return "S";
-        else if (direction.equals("S"))
-            return "W";
-        else
-            return "N";
-    }
 }
