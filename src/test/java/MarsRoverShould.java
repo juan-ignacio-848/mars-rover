@@ -1,8 +1,9 @@
 import org.junit.jupiter.api.Test;
 
-public class Nothing {
+class MarsRoverShould {
 
     @Test
     void nothing() {
+
     }
 }
