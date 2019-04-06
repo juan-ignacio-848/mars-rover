@@ -74,4 +74,23 @@ class MarsRoverShould {
     void wrap_around_when_it_reaches_the_end_of_the_grid_while_moving_east(String commands, String currentPosition) {
         assertThat(marsRover.execute(commands), is(currentPosition));
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "LM, 9:0:W",
+            "LMM, 8:0:W"
+    })
+    void move_left(String commands, String currentPosition) {
+        assertThat(marsRover.execute(commands), is(currentPosition));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "LLM, 0:9:S",
+            "LLMM, 0:8:S",
+    })
+    void move_down(String commands, String currentPosition) {
+        assertThat(marsRover.execute(commands), is(currentPosition));
+    }
+
 }

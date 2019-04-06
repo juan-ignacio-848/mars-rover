@@ -51,8 +51,14 @@ class MarsRover {
                 case EAST:
                     int nextX = (x + 1) % MAX_WIDTH;
                     return new Coordinate(nextX, 0);
+                case WEST:
+                    nextX = x == 0 ? MAX_WIDTH - 1 : x - 1;
+                    return new Coordinate(nextX, 0);
+                case SOUTH:
+                    nextY = y == 0 ? MAX_HEIGHT - 1 : y - 1;
+                    return new Coordinate(0, nextY);
             }
-            return null;
+            return this;
         }
     }
 }
