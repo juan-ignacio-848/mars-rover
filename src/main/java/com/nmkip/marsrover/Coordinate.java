@@ -1,9 +1,8 @@
 package com.nmkip.marsrover;
 
-class Coordinate {
-    private static final int MAX_HEIGHT = 10;
-    private static final int MAX_WIDTH = 10;
+import java.util.Objects;
 
+class Coordinate {
     private final int x;
     private final int y;
 
@@ -20,21 +19,17 @@ class Coordinate {
         return y;
     }
 
-    Coordinate moveTowards(Direction direction) {
-        switch (direction) {
-            case NORTH:
-                int nextY = (y + 1) % MAX_HEIGHT;
-                return new Coordinate(x, nextY);
-            case EAST:
-                int nextX = (x + 1) % MAX_WIDTH;
-                return new Coordinate(nextX, y);
-            case WEST:
-                nextX = x == 0 ? MAX_WIDTH - 1 : x - 1;
-                return new Coordinate(nextX, y);
-            case SOUTH:
-                nextY = y == 0 ? MAX_HEIGHT - 1 : y - 1;
-                return new Coordinate(x, nextY);
-        }
-        return null;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Coordinate)) return false;
+        Coordinate that = (Coordinate) o;
+        return x == that.x &&
+                y == that.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

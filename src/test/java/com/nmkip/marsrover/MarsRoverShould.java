@@ -4,16 +4,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 class MarsRoverShould {
 
+    private final static int MAX_WIDTH = 10;
+    private final static int MAX_HEIGHT = 10;
+
     private MarsRover marsRover;
 
     @BeforeEach
     void setUp() {
-        marsRover = new MarsRover();
+        marsRover = new MarsRover(new Grid(MAX_WIDTH, MAX_HEIGHT));
     }
 
     @ParameterizedTest
@@ -101,6 +108,22 @@ class MarsRoverShould {
             "RMLM, 1:1:N"
     })
     void move_in_zigzag(String commands, String currentPosition) {
+        assertThat(marsRover.execute(commands), is(currentPosition));
+    }
+
+
+    @ParameterizedTest
+    @CsvSource({
+            "MMM, O:0:2:N",
+            "RMMLMMMMMM, O:2:2:N"
+    })
+    void stop_at_obstacle(String commands, String currentPosition) {
+        Set<Coordinate> obstacles = Stream.of(new Coordinate(0, 3),
+                new Coordinate(2, 3))
+                .collect(Collectors.toSet());
+        Grid grid = new Grid(MAX_WIDTH, MAX_HEIGHT, obstacles);
+        MarsRover marsRover = new MarsRover(grid);
+
         assertThat(marsRover.execute(commands), is(currentPosition));
     }
 }
