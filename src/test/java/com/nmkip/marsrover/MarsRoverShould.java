@@ -1,5 +1,6 @@
 package com.nmkip.marsrover;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -7,6 +8,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 class MarsRoverShould {
+
+    private MarsRover marsRover;
+
+    @BeforeEach
+    void setUp() {
+        marsRover = new MarsRover();
+    }
 
     @ParameterizedTest
     @CsvSource({
@@ -16,7 +24,6 @@ class MarsRoverShould {
             "RRRR, 0:0:N"
     })
     void rotate_right(String commands, String currentPosition) {
-        MarsRover marsRover = new MarsRover();
         assertThat(marsRover.execute(commands), is(currentPosition));
     }
 
@@ -25,12 +32,10 @@ class MarsRoverShould {
             "L, 0:0:W",
             "LL, 0:0:S",
             "LLL, 0:0:E",
-            "LLLL, 0:0:N",
+            "LLLL, 0:0:N"
     })
     void rotate_left(String commands, String currentPosition) {
-        MarsRover marsRover = new MarsRover();
         assertThat(marsRover.execute(commands), is(currentPosition));
     }
-
 
 }
